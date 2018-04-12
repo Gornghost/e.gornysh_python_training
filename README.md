@@ -1,1 +1,1 @@
-# e.gornysh_python_training
+# Repository for Python Training
