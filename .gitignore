@@ -104,3 +104,6 @@ ENV/
 *.iml
 .idea
 out
+
+.DS_Store
+.pytest_cache/
