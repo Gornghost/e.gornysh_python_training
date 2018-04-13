@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from selenium.webdriver.firefox.webdriver import WebDriver
-from selenium.webdriver.common.action_chains import ActionChains
-import time, unittest
+import unittest
 
 def is_alert_present(wd):
     try:
@@ -16,22 +15,28 @@ class add_group(unittest.TestCase):
         self.wd.implicitly_wait(60)
     
     def test_add_group(self):
-        success = True
         wd = self.wd
+        # Open homepage
         wd.get("http://localhost/addressbook/group.php")
+        # Login
         wd.find_element_by_name("user").send_keys("admin")
         wd.find_element_by_name("pass").send_keys("secret")
         wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
+        # Open groups page
         wd.find_element_by_link_text("groups").click()
+        # Init group creation
         wd.find_element_by_name("new").click()
+        # Fill group form
         wd.find_element_by_name("group_name").send_keys("New group 1")
         wd.find_element_by_name("group_header").send_keys("Group header 1")
         wd.find_element_by_name("group_footer").send_keys("Group footer")
+        # Submit group creation
         wd.find_element_by_name("submit").click()
+        # Return to group page
         wd.find_element_by_link_text("groups").click()
+        # Logout
         wd.find_element_by_link_text("Logout").click()
-        self.assertTrue(success)
-    
+
     def tearDown(self):
         self.wd.quit()
 
