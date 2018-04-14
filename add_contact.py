@@ -28,7 +28,13 @@ class add_contact(unittest.TestCase):
 
     def create_contact(self, wd, first_name="Eugene", middle_name="Mykolayovich", last_name="Gornysh", nickname="Gorn",
                        title="Title test", company="Company test", address="Address test", home_phone="+123456789",
-                       mobile_phone="+123456789", work_phone="+987654321", fax="+654321987"):
+                       mobile_phone="+123456789", work_phone="+987654321", fax="+654321987", email1="test@test.te",
+                       email2="mail@test.te", email3="mail2@test.te", homepage_link="Homepage test",
+                       birthday_day="//div[@id='content']/form/select[1]//option[3]",
+                       birthday_month="//div[@id='content']/form/select[2]//option[2]", birthday_year="1981",
+                       anniversary_day="//div[@id='content']/form/select[3]//option[4]",
+                       anniversary_month="//div[@id='content']/form/select[4]//option[3]", anniversary_year="1992",
+                       secondary_address="Secondary address", home_phone2="Home test", notes="Notest test"):
         # Click "Add new" - going to creation form
         wd.find_element_by_link_text("add new").click()
         # Fill in general information
@@ -69,40 +75,40 @@ class add_contact(unittest.TestCase):
         # Fill in emails and other
         wd.find_element_by_name("email").click()
         wd.find_element_by_name("email").clear()
-        wd.find_element_by_name("email").send_keys("test@test.te")
+        wd.find_element_by_name("email").send_keys(email1)
         wd.find_element_by_name("email2").click()
         wd.find_element_by_name("email2").clear()
-        wd.find_element_by_name("email2").send_keys("mail@test.te")
+        wd.find_element_by_name("email2").send_keys(email2)
         wd.find_element_by_name("email3").click()
         wd.find_element_by_name("email3").clear()
-        wd.find_element_by_name("email3").send_keys("mail2@test.te")
+        wd.find_element_by_name("email3").send_keys(email3)
         wd.find_element_by_name("homepage").click()
         wd.find_element_by_name("homepage").clear()
-        wd.find_element_by_name("homepage").send_keys("Homepage test")
-        if not wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option[3]").is_selected():
-            wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option[3]").click()
-        if not wd.find_element_by_xpath("//div[@id='content']/form/select[2]//option[2]").is_selected():
-            wd.find_element_by_xpath("//div[@id='content']/form/select[2]//option[2]").click()
+        wd.find_element_by_name("homepage").send_keys(homepage_link)
+        if not wd.find_element_by_xpath(birthday_day).is_selected():
+            wd.find_element_by_xpath(birthday_day).click()
+        if not wd.find_element_by_xpath(birthday_month).is_selected():
+            wd.find_element_by_xpath(birthday_month).click()
         wd.find_element_by_name("byear").click()
         wd.find_element_by_name("byear").clear()
-        wd.find_element_by_name("byear").send_keys("1981")
-        if not wd.find_element_by_xpath("//div[@id='content']/form/select[3]//option[4]").is_selected():
-            wd.find_element_by_xpath("//div[@id='content']/form/select[3]//option[4]").click()
-        if not wd.find_element_by_xpath("//div[@id='content']/form/select[4]//option[3]").is_selected():
-            wd.find_element_by_xpath("//div[@id='content']/form/select[4]//option[3]").click()
+        wd.find_element_by_name("byear").send_keys(birthday_year)
+        if not wd.find_element_by_xpath(anniversary_day).is_selected():
+            wd.find_element_by_xpath(anniversary_day).click()
+        if not wd.find_element_by_xpath(anniversary_month).is_selected():
+            wd.find_element_by_xpath(anniversary_month).click()
         wd.find_element_by_name("ayear").click()
         wd.find_element_by_name("ayear").clear()
-        wd.find_element_by_name("ayear").send_keys("1992")
+        wd.find_element_by_name("ayear").send_keys(anniversary_year)
         # Fill in secondary information
         wd.find_element_by_name("address2").click()
         wd.find_element_by_name("address2").clear()
-        wd.find_element_by_name("address2").send_keys("Secondary address")
+        wd.find_element_by_name("address2").send_keys(secondary_address)
         wd.find_element_by_name("phone2").click()
         wd.find_element_by_name("phone2").clear()
-        wd.find_element_by_name("phone2").send_keys("Home test")
+        wd.find_element_by_name("phone2").send_keys(home_phone2)
         wd.find_element_by_name("notes").click()
         wd.find_element_by_name("notes").clear()
-        wd.find_element_by_name("notes").send_keys("Notest test")
+        wd.find_element_by_name("notes").send_keys(notes)
         # Click Enter (create a contact)
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
 
