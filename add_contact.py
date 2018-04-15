@@ -19,22 +19,24 @@ class add_contact(unittest.TestCase):
         wd = self.wd
         self.open_home_page(wd)
         self.login(wd)
-        self.create_contact(wd)
+        self.create_contact(wd, "Eugene", "Mykolayovich", "Gornysh", "Gorn", "Title test", "Company test",
+                            "Address test", "+123456789", "+123456789", "+987654321", "+654321987", "test@test.te",
+                            "mail@test.te", "mail2@test.te", "Homepage test",
+                            "//div[@id='content']/form/select[1]//option[3]",
+                            "//div[@id='content']/form/select[2]//option[2]", "1981",
+                            "//div[@id='content']/form/select[3]//option[4]",
+                            "//div[@id='content']/form/select[4]//option[3]", "1992", "Secondary address", "Home test",
+                            "Notest test")
         self.logout(wd)
         self.assertTrue(success)
 
     def logout(self, wd):
         wd.find_element_by_link_text("Logout").click()
 
-    def create_contact(self, wd, first_name="Eugene", middle_name="Mykolayovich", last_name="Gornysh", nickname="Gorn",
-                       title="Title test", company="Company test", address="Address test", home_phone="+123456789",
-                       mobile_phone="+123456789", work_phone="+987654321", fax="+654321987", email1="test@test.te",
-                       email2="mail@test.te", email3="mail2@test.te", homepage_link="Homepage test",
-                       birthday_day="//div[@id='content']/form/select[1]//option[3]",
-                       birthday_month="//div[@id='content']/form/select[2]//option[2]", birthday_year="1981",
-                       anniversary_day="//div[@id='content']/form/select[3]//option[4]",
-                       anniversary_month="//div[@id='content']/form/select[4]//option[3]", anniversary_year="1992",
-                       secondary_address="Secondary address", home_phone2="Home test", notes="Notest test"):
+    def create_contact(self, wd, first_name, middle_name, last_name, nickname, title, company, address, home_phone,
+                       mobile_phone, work_phone, fax, email1, email2, email3, homepage_link, birthday_day,
+                       birthday_month, birthday_year, anniversary_day, anniversary_month, anniversary_year,
+                       secondary_address, home_phone2, notes):
         # Click "Add new" - going to creation form
         wd.find_element_by_link_text("add new").click()
         # Fill in general information
