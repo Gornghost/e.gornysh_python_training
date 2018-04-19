@@ -17,9 +17,8 @@ class add_contact(unittest.TestCase):
     
     def test_add_contact(self):
         success = True
-        wd = self.wd
-        self.login(wd, username="admin", password="secret")
-        self.create_contact(wd, Contact(first_name="Eugene", middle_name="Mykolayovich", last_name="Gornysh", nickname="Gorn",
+        self.login(username="admin", password="secret")
+        self.create_contact(Contact(first_name="Eugene", middle_name="Mykolayovich", last_name="Gornysh", nickname="Gorn",
                             title="Title test", company="Company test", address="Address test", home_phone="+123456789",
                             mobile_phone="+123456789", work_phone="+987654321", fax="+654321987", email1="test@test.te",
                             email2="mail@test.te", email3="mail2@test.te", homepage_link="Homepage test",
@@ -28,13 +27,12 @@ class add_contact(unittest.TestCase):
                             anniversary_day="//div[@id='content']/form/select[3]//option[4]",
                             anniversary_month="//div[@id='content']/form/select[4]//option[3]", anniversary_year="1992",
                             secondary_address="Secondary address", home_phone2="Home test", notes="Notes test"))
-        self.logout(wd)
+        self.logout()
 
     def test_add_empty_contact(self):
         success = True
-        wd = self.wd
-        self.login(wd, username="admin", password="secret")
-        self.create_contact(wd, Contact(first_name="", middle_name="", last_name="", nickname="",
+        self.login(username="admin", password="secret")
+        self.create_contact(Contact(first_name="", middle_name="", last_name="", nickname="",
                             title="", company="", address="", home_phone="",
                             mobile_phone="", work_phone="", fax="", email1="",
                             email2="", email3="", homepage_link="",
@@ -43,12 +41,14 @@ class add_contact(unittest.TestCase):
                             anniversary_day="//div[@id='content']/form/select[3]//option[2]",
                             anniversary_month="//div[@id='content']/form/select[4]//option[1]", anniversary_year="",
                             secondary_address="", home_phone2="", notes=""))
-        self.logout(wd)
+        self.logout()
 
-    def logout(self, wd):
+    def logout(self):
+        wd = self.wd
         wd.find_element_by_link_text("Logout").click()
 
-    def create_contact(self, wd, contact):
+    def create_contact(self, contact):
+        wd = self.wd
         # Click "Add new" - going to creation form
         wd.find_element_by_link_text("add new").click()
         # Fill in general information
@@ -126,8 +126,9 @@ class add_contact(unittest.TestCase):
         # Click Enter (create a contact)
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
 
-    def login(self, wd, username, password):
-        self.open_home_page(wd)
+    def login(self, username, password):
+        wd = self.wd
+        self.open_home_page()
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
@@ -136,7 +137,8 @@ class add_contact(unittest.TestCase):
         wd.find_element_by_name("pass").send_keys(password)
         wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
 
-    def open_home_page(self, wd):
+    def open_home_page(self):
+        wd = self.wd
         wd.get("http://localhost/addressbook/index.php")
 
     def tearDown(self):
