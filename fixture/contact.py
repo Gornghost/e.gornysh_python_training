@@ -144,3 +144,14 @@ class ContactHelper:
         wd.find_element_by_name("notes").send_keys(contact.notes)
         # Click Enter (create a contact)
         wd.find_element_by_name("update").click()
+
+    def delete_first(self):
+        wd = self.app.wd
+        # go to home page
+        self.app.open_home_page()
+        # select first contact
+        wd.find_element_by_name("selected[]").click()
+        # submit deletion
+        wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
+        wd.switch_to_alert().accept()
+        self.app.open_home_page()
