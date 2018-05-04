@@ -14,8 +14,8 @@ def test_add_contact(app):
                       anniversary_month="//div[@id='content']/form/select[4]//option[3]", anniversary_year="1992",
                       secondary_address="Secondary address", home_phone2="Home test", notes="Notes test")
     app.contact.create_contact(contact)
+    assert len(old_contact_list) + 1 == app.contact.count()
     new_contact_list = app.contact.get_contact_list()
-    assert len(old_contact_list) + 1 == len(new_contact_list)
     old_contact_list.append(contact)
     assert sorted(old_contact_list, key=Contact.id_or_max) == sorted(new_contact_list, key=Contact.id_or_max)
 

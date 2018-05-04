@@ -12,6 +12,7 @@ class ContactHelper:
         self.fill_contact_form(contact)
         # Click Enter (create a contact)
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+        self.contact_cache = None
 
     def fill_contact_form(self, contact):
         wd = self.app.wd
@@ -65,6 +66,7 @@ class ContactHelper:
         self.fill_contact_form(new_contact_data)
         # Click Enter (create a contact)
         wd.find_element_by_name("update").click()
+        self.contact_cache = None
 
     def delete_first(self):
         wd = self.app.wd
@@ -74,6 +76,7 @@ class ContactHelper:
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         wd.switch_to_alert().accept()
         self.app.open_home_page()
+        self.contact_cache = None
 
     def select_first_contact(self):
         wd = self.app.wd
@@ -84,13 +87,16 @@ class ContactHelper:
         self.app.open_home_page()
         return len(wd.find_elements_by_name("selected[]"))
 
+    contact_cache = None
+
     def get_contact_list(self):
-        wd = self.app.wd
-        self.app.open_home_page()
-        list_of_contacts = []
-        for element in wd.find_elements_by_name("entry"):
-            l_name = element.find_element_by_xpath(".//td[2]").text
-            f_name = element.find_element_by_xpath(".//td[3]").text
-            id = element.find_element_by_name("selected[]").get_attribute("id")
-            list_of_contacts.append(Contact(last_name = l_name, first_name = f_name, id = id))
-        return list_of_contacts
+        if self.contact_cache is None:
+            wd = self.app.wd
+            self.app.open_home_page()
+            self.contact_cache = []
+            for element in wd.find_elements_by_name("entry"):
+                l_name = element.find_element_by_xpath(".//td[2]").text
+                f_name = element.find_element_by_xpath(".//td[3]").text
+                id = element.find_element_by_name("selected[]").get_attribute("id")
+                self.contact_cache.append(Contact(last_name = l_name, first_name = f_name, id = id))
+        return list(self.contact_cache)
