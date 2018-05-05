@@ -64,12 +64,16 @@ class ContactHelper:
         wd = self.app.wd
         self.app.open_home_page()
         self.select_contact_by_index(index)
-        # click "edit"
-        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
+        self.click_edit_icon_by_index(index)
         self.fill_contact_form(new_contact_data)
         # Click Enter (create a contact)
         wd.find_element_by_name("update").click()
         self.contact_cache = None
+
+    def click_edit_icon_by_index(self, index):
+        wd = self.app.wd
+        contact = wd.find_elements_by_name("entry")[index]
+        contact.find_element_by_xpath(".//td[8]/a/img").click()
 
     def delete_first(self):
         self.delete_contact_by_index(0)
