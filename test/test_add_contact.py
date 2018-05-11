@@ -24,7 +24,7 @@ testdata = [
             address=random_string("address", 50), home_phone=random_phone(20), mobile_phone=random_phone(20),
             work_phone=random_phone(20), fax=random_phone(20), email1=random_string("email1", 20),
             email2=random_string("email2", 20), email3=random_string("email3", 20),
-            homepage_link=random_string("hp_link", 40), birthday_day="//div[@id='content']/form/select[1]//option[3]",
+            homepage_link=random_string("hp_link", 40), birthday_day=10,
             birthday_month="//div[@id='content']/form/select[2]//option[2]", birthday_year=random_string("", 10),
             anniversary_day="//div[@id='content']/form/select[3]//option[4]",
             anniversary_month="//div[@id='content']/form/select[4]//option[3]", anniversary_year=random_string("", 10),

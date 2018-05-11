@@ -36,7 +36,7 @@ class ContactHelper:
         self.change_text_field_value("email2", contact.email2)
         self.change_text_field_value("email3", contact.email3)
         self.change_text_field_value("homepage", contact.homepage_link)
-        self.change_select_list_value(contact.birthday_day)
+        self.date_day("bday", contact.birthday_day)
         self.change_select_list_value(contact.birthday_month)
         self.change_text_field_value("byear", contact.birthday_year)
         self.change_select_list_value(contact.anniversary_day)
@@ -46,6 +46,12 @@ class ContactHelper:
         self.change_text_field_value("address2", contact.secondary_address)
         self.change_text_field_value("phone2", contact.home_phone2)
         self.change_text_field_value("notes", contact.notes)
+
+    def date_day(self, field_name, value):
+        wd = self.app.wd
+        if value is not None:
+            select_list = wd.find_element_by_name(field_name)
+            select_list.find_elements_by_tag_name("option")[value].click()
 
     def change_text_field_value(self, field_name, text):
         wd = self.app.wd
@@ -58,6 +64,7 @@ class ContactHelper:
         wd = self.app.wd
         if select_list is not None:
             wd.find_element_by_xpath(select_list).click()
+
 
     def edit_first(self, new_contact_data):
         self.edit_contact_by_index(0, new_contact_data)
