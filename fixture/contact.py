@@ -36,22 +36,22 @@ class ContactHelper:
         self.change_text_field_value("email2", contact.email2)
         self.change_text_field_value("email3", contact.email3)
         self.change_text_field_value("homepage", contact.homepage_link)
-        self.date_day("bday", contact.birthday_day)
-        self.change_select_list_value(contact.birthday_month)
+        self.change_select_list_value("bday", contact.birthday_day)
+        self.change_select_list_value("bmonth", contact.birthday_month)
         self.change_text_field_value("byear", contact.birthday_year)
-        self.change_select_list_value(contact.anniversary_day)
-        self.change_select_list_value(contact.anniversary_month)
+        self.change_select_list_value("aday", contact.anniversary_day)
+        self.change_select_list_value("amonth", contact.anniversary_month)
         self.change_text_field_value("ayear", contact.anniversary_year)
         # Fill in secondary information
         self.change_text_field_value("address2", contact.secondary_address)
         self.change_text_field_value("phone2", contact.home_phone2)
         self.change_text_field_value("notes", contact.notes)
 
-    def date_day(self, field_name, value):
+    def change_select_list_value(self, field_name, value):
         wd = self.app.wd
         if value is not None:
             select_list = wd.find_element_by_name(field_name)
-            select_list.find_elements_by_tag_name("option")[value].click()
+            select_list.find_elements_by_tag_name("option")[int(value)].click()
 
     def change_text_field_value(self, field_name, text):
         wd = self.app.wd
@@ -60,7 +60,7 @@ class ContactHelper:
             wd.find_element_by_name(field_name).clear()
             wd.find_element_by_name(field_name).send_keys(text)
 
-    def change_select_list_value(self, select_list):
+    def change_select_list_value12312312312(self, select_list):
         wd = self.app.wd
         if select_list is not None:
             wd.find_element_by_xpath(select_list).click()
