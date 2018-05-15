@@ -60,12 +60,6 @@ class ContactHelper:
             wd.find_element_by_name(field_name).clear()
             wd.find_element_by_name(field_name).send_keys(text)
 
-    def change_select_list_value12312312312(self, select_list):
-        wd = self.app.wd
-        if select_list is not None:
-            wd.find_element_by_xpath(select_list).click()
-
-
     def edit_first(self, new_contact_data):
         self.edit_contact_by_index(0, new_contact_data)
 
