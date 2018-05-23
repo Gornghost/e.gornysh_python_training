@@ -8,7 +8,6 @@ def test_delete_random_group(app, db):
     old_groups = db.get_group_list()
     group = random.choice(old_groups)
     app.group.delete_group_by_id(group.id)
-    assert app.group.count() == len(old_groups) - 1
     new_groups = db.get_group_list()
     old_groups.remove(group)
     assert old_groups == new_groups
