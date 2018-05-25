@@ -20,7 +20,7 @@ class ORMFixture:
         id = PrimaryKey(int, column='id')
         firstname = Optional(str, column='firstname')
         lastname = Optional(str, column='lastname')
-        deprecated = Optional(datetime, column='deprecated')
+        deprecated = Optional(str, column='deprecated')
 
     def __init__(self, host, name, user, password):
         conv = encoders
@@ -41,7 +41,7 @@ class ORMFixture:
 
     def convert_contacts_to_model(self, contacts):
         def convert(contact):
-            return Contact(id=str(contact.id), first_name=contact.first_name, last_name=contact.last_name)
+            return Contact(id=str(contact.id), first_name=contact.firstname, last_name=contact.lastname)
         return list(map(convert, contacts))
 
     @db_session

@@ -160,6 +160,18 @@ class ContactHelper:
                                                   all_phones_from_homepage=all_phones, all_emails_from_homepage=all_emails))
         return list(self.contact_cache)
 
+    def get_emails_list_from_homepage(self, contact_list_ui):
+        emails_list_ui = []
+        for contact in contact_list_ui:
+            emails_list_ui.append(contact.all_emails_from_homepage)
+        return emails_list_ui
+
+    def get_phones_list_from_homepage(self, contact_list_ui):
+        phones_list_ui = []
+        for contact in contact_list_ui:
+            phones_list_ui.append(contact.all_phones_from_homepage)
+        return phones_list_ui
+
     def get_contact_info_from_edit_page(self, index):
         wd = self.app.wd
         self.open_edit_page_by_index(index)
