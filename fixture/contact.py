@@ -209,7 +209,6 @@ class ContactHelper:
         wd.find_element_by_name("add").click()
         self.app.open_home_page()
 
-
     def delete_contact_by_id_from_group(self, contact_id, group_id):
         wd = self.app.wd
         self.app.open_home_page()
